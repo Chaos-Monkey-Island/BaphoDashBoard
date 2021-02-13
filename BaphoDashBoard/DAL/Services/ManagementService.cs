@@ -262,6 +262,25 @@ namespace BaphoDashBoard.DAL.Services
                     }
                 }
 
+                if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    if (draw_rsa_key.success == true && draw_host_list.success == true && draw_extensions.success == true && draw_processes.success == true && draw_dirs.success == true)
+                    {
+                        var command = "cd " + output_path + " && ./compile.bat";
+                        Console.WriteLine(command);
+                        Process proc = new System.Diagnostics.Process ();
+                        proc.StartInfo.FileName = "/bin/bash";
+                        proc.StartInfo.Arguments = "-c \""+command + " \"";
+                        proc.StartInfo.UseShellExecute = false; 
+                        proc.StartInfo.RedirectStandardOutput = true;
+                        proc.Start ();
+
+                        while (!proc.StandardOutput.EndOfStream) {
+                            Console.WriteLine (proc.StandardOutput.ReadLine ());
+                        }
+                    }
+                }
+
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 {
                     if (draw_rsa_key.success == true && draw_host_list.success == true && draw_extensions.success == true && draw_processes.success == true && draw_dirs.success == true)
