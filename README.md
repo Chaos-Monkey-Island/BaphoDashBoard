@@ -31,6 +31,8 @@ thrown out for educational purposes and so we can get something out of it to lea
 
 * Windows 10
 * Mac OS Mojave
+* Debian 10
+* Kali Linux
 
 **File that we must modify**
 
